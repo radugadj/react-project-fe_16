@@ -1,0 +1,19 @@
+{
+  "name": "react-project_fe_16",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/radugadj/react-project-fe_16.git"
+  },
+  "author": "Alexey Pavlov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/radugadj/react-project-fe_16/issues"
+  },
+  "homepage": "https://github.com/radugadj/react-project-fe_16#readme"
+}
