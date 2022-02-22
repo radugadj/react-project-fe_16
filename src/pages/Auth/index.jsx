@@ -1,20 +1,17 @@
 import React from "react";
-import { Form, Icon, Imput } from "antd";
-import { Block, Button } from "components";
-
+import { Route } from 'react-router-dom'; 
+ 
+import { LoginForm, RegisterForm } from '../../modules';
 
 import "./Auth.scss";
 
 const Auth = () => (
-  <div className="auth">
-          <h1>Войти в аккаунт</h1>
-          <p>Пожалуйста, войдите в свой аккаунт</p>
-      <Block>
-        <Button type="primary" size="large">
-          Click here
-        </Button>
-      </Block>
-  </div>
+  <section className="auth">
+    <div className="auth__content">
+      <Route exact path="/" component={LoginForm} />
+      <Route exact path="/" component={RegisterForm} />
+    </div>
+  </section>
 );
 
 export default Auth;
