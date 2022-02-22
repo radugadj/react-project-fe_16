@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Auth } from "pages";
+import { Auth, Home } from "./pages";
 class App extends Component {
   render() {
     return (
