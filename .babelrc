@@ -1,16 +1,8 @@
 {
-    "presets": ["@babel/preset-env"],
-    "plugins": [
-        "@babel/plugin-syntax-dynamic-import",
-        [
-            "babel-plugin-module-resolver",
-            {
-                "alias": {
-                    "react": "./node_modules/react/umd/react.development.js",
-                    "react-dom": "./node_modules/react-dom/umd/react-dom.development.js"
-                }
-                // подменяем путь чтоб оставаться внутри директории build
-            }
-        ]
+    "presets": [
+      ["@babel/preset-react", {
+        "runtime": "automatic"
+      }]
     ]
-}
+  }
+  

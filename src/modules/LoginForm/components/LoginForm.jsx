@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-// import { Form, Icon, Input } from "antd";
+import { Form, Input } from 'antd';
 import { Link } from 'react-router-dom';
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
-import { Button, Block } from '../../../components';
+import { Block, Button } from '../../../components';
 
+import 'antd/dist/antd.css';
 class LoginForm extends Component {
     render() {
         return (
@@ -16,17 +18,17 @@ class LoginForm extends Component {
               <Form onSubmit={this.handleSubmit} className="login-form">
               <Form.Item validation="success" hasFeedback>
                 <Input 
-                prefix={<Icon type="user" style={{color: 'rgba(0,0,0,.25'}}/>} 
+                prefix={<UserOutlined className="site-form-item-icon" />} 
                 size="large"
-                placeholder="Username" 
+                placeholder="Ваше имя" 
                 />
               </Form.Item>
               <Form.Item>
                 <Input
-                  prefix={<Icon type="lock" style={{color: 'rgba(0,0,0,.25'}}/>}
+                  prefix={<LockOutlined className="site-form-item-icon" />}
                   size="large"
                   type="password"
-                  placeholder="Password"
+                  placeholder="Ваш пароль"
                 />
               </Form.Item>
               <Form.Item>

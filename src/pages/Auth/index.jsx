@@ -1,17 +1,23 @@
 import React from "react";
-import { Route } from 'react-router-dom'; 
+import { Route, Switch } from 'react-router-dom'; 
+
  
 import { LoginForm, RegisterForm } from '../../modules';
 
 import "./Auth.scss";
 
+
 const Auth = () => (
   <section className="auth">
     <div className="auth__content">
-      <Route exact path="/" component={LoginForm} />
-      <Route exact path="/" component={RegisterForm} />
-    </div>
-  </section>
+    <Switch>
+      <Route exact path="/login" component={LoginForm} />
+       <LoginForm />
+       <Route exact path="/register" component={RegisterForm} />
+       <RegisterForm />
+    </Switch>
+      </div>
+      </section>
 );
 
 export default Auth;
