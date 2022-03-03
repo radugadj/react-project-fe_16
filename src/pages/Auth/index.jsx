@@ -14,6 +14,9 @@ const Auth = () => (
       <Route exact path="/login" />
        <LoginForm />
        <Route exact path="/reg" />
+      <Route exact path="/login" component={LoginForm} />
+       <LoginForm />
+       <Route exact path="/register" component={RegisterForm} />
        <RegisterForm />
     </Switch>
       </div>

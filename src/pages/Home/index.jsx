@@ -1,7 +1,11 @@
 import React from "react";
+
 import { Message } from "../../components";
+import { Route, Switch } from 'react-router-dom'; 
+
 
 import "./Home.scss";
+
 
 
 const  Home = () => (
