@@ -1,69 +1,100 @@
 import React, { Component } from 'react';
-// import { Form, Icon, Input } from "antd";
+import { Form, Input } from 'antd';
 import { Link } from 'react-router-dom';
-import { InfoCircleTwoTone } from '@ant-design/icons';
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
-import { Button, Block } from '../../../components';
+import { Block, Button } from '../../../components';
 
+import 'antd/dist/antd.css';
+
+const success = false;
 class RegisterForm extends Component {
     render() {
-      const success = false;
+      
         return (
           <div>
-            <div className="auth__top">
-              <h2>Регистрация</h2>
-              <p>Для входа в чат, вам необходимо зарегестрироваться</p>
+      <div className="auth__top">
+        <h2>Регистрация</h2>
+        <p>Для входа в чат, вам нужно зарегистрироваться</p>
+      </div>
+      <Block>
+        {!success ? (
+          <Form onSubmit={handleSubmit} className="login-form">
+            <FormField
+              name="email"
+              icon="mail"
+              placeholder="E-Mail"
+              handleChange={handleChange}
+              handleBlur={handleBlur}
+              touched={touched}
+              errors={errors}
+              values={values}
+            />
+
+            <FormField
+              name="fullname"
+              icon="user"
+              placeholder="Ваше имя и фамилия"
+              handleChange={handleChange}
+              handleBlur={handleBlur}
+              touched={touched}
+              errors={errors}
+              values={values}
+            />
+
+            <FormField
+              name="password"
+              icon="lock"
+              placeholder="Пароль"
+              type="password"
+              handleChange={handleChange}
+              handleBlur={handleBlur}
+              touched={touched}
+              errors={errors}
+              values={values}
+            />
+
+            <FormField
+              name="password_2"
+              icon="lock"
+              placeholder="Повторите пароль"
+              type="password"
+              handleChange={handleChange}
+              handleBlur={handleBlur}
+              touched={touched}
+              errors={errors}
+              values={values}
+            />
+
+            <Form.Item>
+              {isSubmitting && !isValid && <span>Ошибка!</span>}
+              <Button
+                disabled={isSubmitting}
+                onClick={handleSubmit}
+                type="primary"
+                size="large"
+              >
+                Зарегистрироваться
+              </Button>
+            </Form.Item>
+            <Link className="auth__register-link" to="/signin">
+              Войти в аккаунт
+            </Link>
+          </Form>
+        ) : (
+          <div className="auth__success-block">
+            <div>
+              <Icon type="info-circle" theme="twoTone" />
             </div>
-            <Block>
-              {!success ? (
-              <Form onSubmit={this.handleSubmit} className="login-form">
-              <Form.Item validation="success" hasFeedback>
-                <Input 
-                prefix={<Icon type="user" style={{color: 'rgba(0,0,0,.25'}}/>} 
-                size="large"
-                placeholder="Ваше Имя" 
-                />
-              </Form.Item>
-              <Form.Item validation="success" hasFeedback>
-                <Input 
-                prefix={<Icon type="email" style={{color: 'rgba(0,0,0,.25'}}/>} 
-                size="large"
-                placeholder="E-mail" 
-                />
-              </Form.Item>
-              <Form.Item>
-                <Input
-                  prefix={<Icon type="lock" style={{color: 'rgba(0,0,0,.25'}}/>}
-                  size="large"
-                  type="password"
-                  placeholder="Пароль"
-                />
-              </Form.Item>
-              <Form.Item>
-                <Input
-                  prefix={<Icon type="lock" style={{color: 'rgba(0,0,0,.25'}}/>}
-                  size="large"
-                  type="password"
-                  placeholder="Повторите пароль"
-                />
-              </Form.Item>
-              <Form.Item>
-                <Button type="primary" size="large">
-                Зарегестрироваться
-                </Button>
-              </Form.Item>
-              <Link className="auth__register-link" to="/login">
-                Войти в аккаунт
-              </Link>
-            </Form>
-            ) : (
-            <div className="auth_success-block">
-              <div><InfoCircleTwoTone /></div>
-            </div>)}
-              
-          </Block>
+            <h2>Подтвердите свой аккаунт</h2>
+            <p>
+              На Вашу почту отправлено письмо с ссылкой на подтверждение
+              аккаунта.
+            </p>
           </div>
-            
+        )}
+      </Block>
+    </div>
         );
     }    
 }
