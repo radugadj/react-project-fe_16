@@ -36,7 +36,7 @@ class LoginForm extends Component {
                   Войти в аккаунт
                 </Button>
               </Form.Item>
-              <Link className="auth__register-link" to="/register">
+              <Link className="auth__register-link" to="/reg">
                 Зарегестрироваться
               </Link>
             </Form>
