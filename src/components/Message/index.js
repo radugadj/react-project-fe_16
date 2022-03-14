@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classNames from 'classnames';
+import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
 import "./Message.scss";
 
@@ -14,7 +15,7 @@ const Message = ({ avatar, user, text, date }) => (
       <div className="message__bubble">
         <p className="message__text">{text}</p>
       </div>
-      <span className="message__data">{date}</span>
+      <span className="message__data">{formatDistanceToNow(date)}</span>
     </div>
   </div>
 );
@@ -26,8 +27,8 @@ Message.defaultProps = {
 // Massage.PropTypes = {
 //   avatar: PropTypes.string,
 //   text: PropTypes.string,
-//   data: PropTypes.object,
-//   user: PropTypes.string,
+//   data: PropTypes.string,
+//   user: PropTypes.object,
 // };
 
 export default Message;
