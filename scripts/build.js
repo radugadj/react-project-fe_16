@@ -12,25 +12,25 @@ process.on('unhandledRejection', err => {
 });
 
 // Ensure environment variables are read.
-require('../config/env');
+import '../config/env';
 
-const path = require('path');
-const chalk = require('react-dev-utils/chalk');
-const fs = require('fs-extra');
-const bfj = require('bfj');
-const webpack = require('webpack');
-const configFactory = require('../config/webpack.config');
-const paths = require('../config/paths');
-const checkRequiredFiles = require('react-dev-utils/checkRequiredFiles');
-const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages');
-const printHostingInstructions = require('react-dev-utils/printHostingInstructions');
-const FileSizeReporter = require('react-dev-utils/FileSizeReporter');
-const printBuildError = require('react-dev-utils/printBuildError');
+import { relative } from 'path';
+import { yellow, underline, cyan, green, red } from 'react-dev-utils/chalk';
+import { existsSync, emptyDirSync, copySync } from 'fs-extra';
+import { write } from 'bfj';
+import webpack from 'webpack';
+import configFactory from '../config/webpack.config';
+import { yarnLockFile, appHtml, appIndexJs, appPath, appBuild, appPackageJson, publicUrlOrPath, appPublic } from '../config/paths';
+import checkRequiredFiles from 'react-dev-utils/checkRequiredFiles';
+import formatWebpackMessages from 'react-dev-utils/formatWebpackMessages';
+import printHostingInstructions from 'react-dev-utils/printHostingInstructions';
+import { measureFileSizesBeforeBuild as _measureFileSizesBeforeBuild, printFileSizesAfterBuild as _printFileSizesAfterBuild } from 'react-dev-utils/FileSizeReporter';
+import printBuildError from 'react-dev-utils/printBuildError';
 
 const measureFileSizesBeforeBuild =
-  FileSizeReporter.measureFileSizesBeforeBuild;
-const printFileSizesAfterBuild = FileSizeReporter.printFileSizesAfterBuild;
-const useYarn = fs.existsSync(paths.yarnLockFile);
+  _measureFileSizesBeforeBuild;
+const printFileSizesAfterBuild = _printFileSizesAfterBuild;
+const useYarn = existsSync(yarnLockFile);
 
 // These sizes are pretty large. We'll warn for bundles exceeding them.
 const WARN_AFTER_BUNDLE_GZIP_SIZE = 512 * 1024;
@@ -39,7 +39,7 @@ const WARN_AFTER_CHUNK_GZIP_SIZE = 1024 * 1024;
 const isInteractive = process.stdout.isTTY;
 
 // Warn and crash if required files are missing
-if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
+if (!checkRequiredFiles([appHtml, appIndexJs])) {
   process.exit(1);
 }
 
@@ -51,17 +51,17 @@ const config = configFactory('production');
 
 // We require that you explicitly set browsers and do not fall back to
 // browserslist defaults.
-const { checkBrowsers } = require('react-dev-utils/browsersHelper');
-checkBrowsers(paths.appPath, isInteractive)
+import { checkBrowsers } from 'react-dev-utils/browsersHelper';
+checkBrowsers(appPath, isInteractive)
   .then(() => {
     // First, read the current file sizes in build directory.
     // This lets us display how much they changed later.
-    return measureFileSizesBeforeBuild(paths.appBuild);
+    return measureFileSizesBeforeBuild(appBuild);
   })
   .then(previousFileSizes => {
     // Remove all content but keep the directory so that
     // if you're in it, you don't end up in Trash
-    fs.emptyDirSync(paths.appBuild);
+    emptyDirSync(appBuild);
     // Merge with the public folder
     copyPublicFolder();
     // Start the webpack build
@@ -70,36 +70,36 @@ checkBrowsers(paths.appPath, isInteractive)
   .then(
     ({ stats, previousFileSizes, warnings }) => {
       if (warnings.length) {
-        console.log(chalk.yellow('Compiled with warnings.\n'));
+        console.log(yellow('Compiled with warnings.\n'));
         console.log(warnings.join('\n\n'));
         console.log(
           '\nSearch for the ' +
-            chalk.underline(chalk.yellow('keywords')) +
+            underline(yellow('keywords')) +
             ' to learn more about each warning.'
         );
         console.log(
           'To ignore, add ' +
-            chalk.cyan('// eslint-disable-next-line') +
+            cyan('// eslint-disable-next-line') +
             ' to the line before.\n'
         );
       } else {
-        console.log(chalk.green('Compiled successfully.\n'));
+        console.log(green('Compiled successfully.\n'));
       }
 
       console.log('File sizes after gzip:\n');
       printFileSizesAfterBuild(
         stats,
         previousFileSizes,
-        paths.appBuild,
+        appBuild,
         WARN_AFTER_BUNDLE_GZIP_SIZE,
         WARN_AFTER_CHUNK_GZIP_SIZE
       );
       console.log();
 
-      const appPackage = require(paths.appPackageJson);
-      const publicUrl = paths.publicUrlOrPath;
+      const appPackage = require(appPackageJson);
+      const publicUrl = publicUrlOrPath;
       const publicPath = config.output.publicPath;
-      const buildFolder = path.relative(process.cwd(), paths.appBuild);
+      const buildFolder = relative(process.cwd(), appBuild);
       printHostingInstructions(
         appPackage,
         publicUrl,
@@ -112,13 +112,13 @@ checkBrowsers(paths.appPath, isInteractive)
       const tscCompileOnError = process.env.TSC_COMPILE_ON_ERROR === 'true';
       if (tscCompileOnError) {
         console.log(
-          chalk.yellow(
+          yellow(
             'Compiled with the following type errors (you may want to check these before deploying your app):\n'
           )
         );
         printBuildError(err);
       } else {
-        console.log(chalk.red('Failed to compile.\n'));
+        console.log(red('Failed to compile.\n'));
         printBuildError(err);
         process.exit(1);
       }
@@ -182,7 +182,7 @@ function build(previousFileSizes) {
         );
         if (filteredWarnings.length) {
           console.log(
-            chalk.yellow(
+            yellow(
               '\nTreating warnings as errors because process.env.CI = true.\n' +
                 'Most CI servers set it automatically.\n'
             )
@@ -198,8 +198,7 @@ function build(previousFileSizes) {
       };
 
       if (writeStatsJson) {
-        return bfj
-          .write(paths.appBuild + '/bundle-stats.json', stats.toJson())
+        return write(appBuild + '/bundle-stats.json', stats.toJson())
           .then(() => resolve(resolveArgs))
           .catch(error => reject(new Error(error)));
       }
@@ -210,8 +209,8 @@ function build(previousFileSizes) {
 }
 
 function copyPublicFolder() {
-  fs.copySync(paths.appPublic, paths.appBuild, {
+  copySync(appPublic, appBuild, {
     dereference: true,
-    filter: file => file !== paths.appHtml,
+    filter: file => file !== appHtml,
   });
 }
