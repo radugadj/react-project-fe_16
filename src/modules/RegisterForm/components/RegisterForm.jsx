@@ -3,16 +3,25 @@ import { Form, Input } from 'antd';
 import { Link } from 'react-router-dom';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
-import { Block, Button } from '../../../components';
+
+import { Block, Button, FormField } from '../../../components';
 
 import 'antd/dist/antd.css';
 
 const success = false;
-class RegisterForm extends Component {
-    render() {
-      
-        return (
-          <div>
+const RegisterForm = props => {
+  const {
+    values,
+    touched,
+    errors,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+    isValid,
+    isSubmitting
+  } = props;
+  return (
+    <div>
       <div className="auth__top">
         <h2>Регистрация</h2>
         <p>Для входа в чат, вам нужно зарегистрироваться</p>
@@ -77,7 +86,7 @@ class RegisterForm extends Component {
                 Зарегистрироваться
               </Button>
             </Form.Item>
-            <Link className="auth__register-link" to="/signin">
+            <Link className="auth__register-link" to="/">
               Войти в аккаунт
             </Link>
           </Form>
@@ -95,8 +104,7 @@ class RegisterForm extends Component {
         )}
       </Block>
     </div>
-        );
-    }    
-}
+  );
+};
 
 export default RegisterForm;

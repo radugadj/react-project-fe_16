@@ -6,15 +6,15 @@ class App extends Component {
   render() {
     return (
       <div className="wrapper">
-        <Route exact path={["/", "/login"]} />
-        <Auth />
-        <Route exact path="/im " component={<Home />} />
-        <Home />
+        {/* <Route exact path={["/", "/login"]}>
+          <Auth />
+        </Route> */}
+        <Route exact path="/im">
+          <Home />
+        </Route>
       </div>
     );
   }
 }
 
-
-export default App; 
-
+export default App;
