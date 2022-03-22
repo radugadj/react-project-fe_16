@@ -17,10 +17,10 @@ class LoginForm extends Component {
             <Block>
               <Form onSubmit={this.handleSubmit} className="login-form">
               <Form.Item validation="success" hasFeedback>
-                <Input 
-                prefix={<UserOutlined className="site-form-item-icon" />} 
+                <Input
+                prefix={<UserOutlined className="site-form-item-icon" />}
                 size="large"
-                placeholder="Ваше имя" 
+                placeholder="Ваше имя"
                 />
               </Form.Item>
               <Form.Item>
