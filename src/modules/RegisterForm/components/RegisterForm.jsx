@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Form, Input } from 'antd';
+import Icon from '@ant-design/icons'
 import { Link } from 'react-router-dom';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons';
 
 
 import { Block, Button, FormField } from '../../../components';
@@ -31,7 +32,7 @@ const RegisterForm = props => {
           <Form onSubmit={handleSubmit} className="login-form">
             <FormField
               name="email"
-              icon="mail"
+              icon={<MailOutlined />}
               placeholder="E-Mail"
               handleChange={handleChange}
               handleBlur={handleBlur}
@@ -39,7 +40,6 @@ const RegisterForm = props => {
               errors={errors}
               values={values}
             />
-
             <FormField
               name="fullname"
               icon="user"
