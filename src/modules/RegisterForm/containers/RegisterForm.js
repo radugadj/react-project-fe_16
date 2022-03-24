@@ -1,20 +1,15 @@
 import {withFormik } from 'formik'
 import RegisterForm from "../components/RegisterForm"
+import validateFunc from "../../../utils/validate";
 
 export default withFormik({
-    mapPropsValues: () => ({email: "weqeqweqw"}),
-
     validate: values => {
         let errors = {};
-        if (!values.email) {
-            errors.email = "Required";
-        } else if (
-            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
-        ) {
-            errors.email = "Invalid email address"
-        }
+        const validate = validateFunc({ isAuth: false, values, errors});
+         Object.keys(values).forEach(key => validate[key] && validate[key](errors, values[key]));
+
         return errors;
-    },
+        },
      handleSubmit: (values, { setSubmitting }) => {
         setTimeout(() => {
             alert(JSON.stringify(values, null, 2));
