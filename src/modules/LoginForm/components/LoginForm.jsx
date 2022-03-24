@@ -16,7 +16,7 @@ class LoginForm extends Component {
             </div>
             <Block>
               <Form onSubmit={this.handleSubmit} className="login-form">
-              <Form.Item validation="success" hasFeedback>
+              <Form.Item validateStatus="success" hasFeedback>
                 <Input
                 prefix={<UserOutlined className="site-form-item-icon" />}
                 size="large"
@@ -42,9 +42,8 @@ class LoginForm extends Component {
             </Form>
           </Block>
           </div>
-            
         );
-    }    
+    }
 }
 
 export default LoginForm;

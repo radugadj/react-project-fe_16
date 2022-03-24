@@ -30,51 +30,59 @@ const RegisterForm = props => {
       <Block>
         {!success ? (
           <Form onSubmit={handleSubmit} className="login-form">
-            <FormField
-              name="email"
-              icon={<MailOutlined />}
-              placeholder="E-Mail"
-              handleChange={handleChange}
-              handleBlur={handleBlur}
-              touched={touched}
-              errors={errors}
-              values={values}
-            />
-            <FormField
-              name="fullname"
-              icon="user"
-              placeholder="Ваше имя и фамилия"
-              handleChange={handleChange}
-              handleBlur={handleBlur}
-              touched={touched}
-              errors={errors}
-              values={values}
-            />
-
-            <FormField
-              name="password"
-              icon="lock"
-              placeholder="Пароль"
-              type="password"
-              handleChange={handleChange}
-              handleBlur={handleBlur}
-              touched={touched}
-              errors={errors}
-              values={values}
-            />
-
-            <FormField
-              name="password_2"
-              icon="lock"
-              placeholder="Повторите пароль"
-              type="password"
-              handleChange={handleChange}
-              handleBlur={handleBlur}
-              touched={touched}
-              errors={errors}
-              values={values}
-            />
-
+            <Form.Item
+              help={!touched.email ? "" : errors.email}
+              hasFeedback
+            >
+              <Input
+                id="email"
+                prefix={
+                  <MailOutlined type="mail" style={{ color: "rgba(0,0,0,.25)" }} />
+                }
+                size="large"
+                placeholder="E-Mail"
+                value={values.email}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+            </Form.Item>
+            <Form.Item>
+              <Input
+                prefix={
+                  <UserOutlined type="user" style={{ color: "rgba(0,0,0,.25)" }} />
+                }
+                size="large"
+                placeholder="Ваше имя"
+              />
+            </Form.Item>
+            <Form.Item
+              help={!touched.password ? "" : errors.password}
+              hasFeedback
+            >
+              <Input
+                id="password"
+                prefix={
+                  <LockOutlined type="lock" style={{ color: "rgba(0,0,0,.25)" }} />
+                }
+                size="large"
+                type="password"
+                placeholder="Пароль"
+                value={values.password}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+            </Form.Item>
+            <Form.Item>
+              <Input
+                id="password_2"
+                prefix={
+                  <LockOutlined type="lock" style={{ color: "rgba(0,0,0,.25)" }} />
+                }
+                size="large"
+                type="password2"
+                placeholder="Повторите пароль"
+              />
+            </Form.Item>
             <Form.Item>
               {isSubmitting && !isValid && <span>Ошибка!</span>}
               <Button
