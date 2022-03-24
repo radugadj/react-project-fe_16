@@ -6,12 +6,12 @@ class App extends Component {
   render() {
     return (
       <div className="wrapper">
-        {/* <Route exact path={["/", "/login"]}>
+        <Route exact path={["/", "/login", "/reg"]} component={Auth}>
           <Auth />
-        </Route> */}
-        <Route exact path="/im">
-          <Home />
-        </Route>
+          </Route>
+        <Route exact path="/im" component={Home}>
+        <Home />
+          </Route>
       </div>
     );
   }
