@@ -1,6 +1,7 @@
-@import '~reset-css';
-@import '~antd/dist/antd.css';
+@import "~reset-css";
+@import "~antd/dist/antd.css";
 
+@import "layouts/chat";
 
 body {
   background-color: #f4f7fd;
@@ -35,17 +36,4 @@ html,
   &:after {
     display: none;
   }
-}
-
-#components-form-demo-normal-login .login-form {
-  max-width: 300px;
-}
-#components-form-demo-normal-login .login-form-forgot {
-  float: right;
-}
-#components-form-demo-normal-login .ant-col-rtl .login-form-forgot {
-  float: left;
-}
-#components-form-demo-normal-login .login-form-button {
-  width: 100%;
 }
