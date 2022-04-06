@@ -1,19 +1,65 @@
 import React from "react";
-import { Message } from "../../components";
+import { Message, Dialogs } from "../../components";
+
 
 import "./Home.scss";
 
 const Home = () => (
   <section className="home">
+    <Dialogs
+      items={[
+        {
+          user: {
+            fullname: "Фёдор Достоевский",
+            avatar: null
+          },
+          message: {
+            text:
+              "Мы все свидетельствуем Вам глубочайшее наше почтение и целуем Ваши ручки, дражайший папенька: Михайла, Федор, Варвара и Андрюша",
+            isReaded: false,
+            created_at: new Date()
+          }
+        }
+      ]}
+    />
+    {/* <Message
+      avatar="https://pp.userapi.com/c846017/v846017841/18957c/1iVH9FKXi4E.jpg?ava=1"
+      text="Мы тут недавно войска Ариовиста разбили, чуваки хотели закрепиться на галльских землях, лол 🌝"
+      date="Sun Apr 21 2019 21:55:29"
+      attachments={[
+        {
+          filename: "image.jpg",
+          url: "https://source.unsplash.com/100x100/?random=1&nature,water"
+        },
+        {
+          filename: "image.jpg",
+          url: "https://source.unsplash.com/100x100/?random=2&nature,water"
+        },
+        {
+          filename: "image.jpg",
+          url: "https://source.unsplash.com/100x100/?random=3&nature,water"
+        }
+      ]}
+    /> */}
     <Message
-      avatar="https://cdn-icons-png.flaticon.com/512/147/147144.png"
-      text="Привет, как дела?"
+      avatar="https://sun1-89.userapi.com/c850424/v850424867/f6869/B-F_i2BilOA.jpg?ava=1"
+      text="Hello, World!"
+      date="Sun Apr 21 2019 21:59:29"
+      isMe={true}
+      isReaded={false}
     />
     <Message
-      avatar="https://miro.medium.com/max/1400/1*JyYin7G7aGwgD9zpYBZ12Q.png"
-      text="Привет, все хорошо, а ты как?"
-      isMe={true}
-      isReaded={true}
+      avatar="https://pp.userapi.com/c846017/v846017841/18957c/1iVH9FKXi4E.jpg?ava=1"
+      attachments={[
+        {
+          filename: "image.jpg",
+          url: "https://source.unsplash.com/100x100/?random=1&nature,water"
+        }
+      ]}
+    />
+    <Message
+      avatar="https://pp.userapi.com/c846017/v846017841/18957c/1iVH9FKXi4E.jpg?ava=1"
+      isTyping
     />
   </section>
 );

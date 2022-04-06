@@ -9,6 +9,18 @@ import { Block, Button, FormField } from '../../../components';
 
 import 'antd/dist/antd.css';
 
+const validate = (key, touched, errors) => {
+  if (touched[key]) {
+    if (errors[key]) {
+      return "error";
+    } else {
+      return "succes";
+    }
+  } else {
+    return "";
+  }
+};
+
 const success = false;
 const RegisterForm = props => {
   const {
@@ -30,10 +42,13 @@ const RegisterForm = props => {
       <Block>
         {!success ? (
           <Form onSubmit={handleSubmit} className="login-form">
-            <Form.Item
-              help={!touched.email ? "" : errors.email}
-              hasFeedback
-            >
+          <Form.Item
+          validateStatus={
+            !touched.email ? "" : errors.email ? "errors" : "success"
+          }
+            help={!touched.email ? "" : errors.email}
+            hasFeedback
+          >
               <Input
                 id="email"
                 prefix={
@@ -79,7 +94,7 @@ const RegisterForm = props => {
                   <LockOutlined type="lock" style={{ color: "rgba(0,0,0,.25)" }} />
                 }
                 size="large"
-                type="password2"
+                type="password"
                 placeholder="Повторите пароль"
               />
             </Form.Item>
