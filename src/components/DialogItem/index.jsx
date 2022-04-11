@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import format from 'date-fns/format';
-import { isToday } from 'date-fns';
+import isToday from 'date-fns/is_today';
 import { Link } from 'react-router-dom';
 
 import { IconReaded, Avatar } from '../';

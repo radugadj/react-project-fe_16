@@ -1,27 +1,11 @@
-import React, { Component } from 'react';
-import { Form, Input } from 'antd';
-import Icon from '@ant-design/icons'
-import { Link } from 'react-router-dom';
-import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons';
+import React from "react";
+import { Form, Icon } from "antd";
+import { Link } from "react-router-dom";
 
-
-import { Block, Button, FormField } from '../../../components';
-
-import 'antd/dist/antd.css';
-
-const validate = (key, touched, errors) => {
-  if (touched[key]) {
-    if (errors[key]) {
-      return "error";
-    } else {
-      return "succes";
-    }
-  } else {
-    return "";
-  }
-};
+import { Button, Block, FormField } from "components";
 
 const success = false;
+
 const RegisterForm = props => {
   const {
     values,
@@ -42,62 +26,52 @@ const RegisterForm = props => {
       <Block>
         {!success ? (
           <Form onSubmit={handleSubmit} className="login-form">
-          <Form.Item
-          validateStatus={
-            !touched.email ? "" : errors.email ? "errors" : "success"
-          }
-            help={!touched.email ? "" : errors.email}
-            hasFeedback
-          >
-              <Input
-                id="email"
-                prefix={
-                  <MailOutlined type="mail" style={{ color: "rgba(0,0,0,.25)" }} />
-                }
-                size="large"
-                placeholder="E-Mail"
-                value={values.email}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-            </Form.Item>
-            <Form.Item>
-              <Input
-                prefix={
-                  <UserOutlined type="user" style={{ color: "rgba(0,0,0,.25)" }} />
-                }
-                size="large"
-                placeholder="Ваше имя"
-              />
-            </Form.Item>
-            <Form.Item
-              help={!touched.password ? "" : errors.password}
-              hasFeedback
-            >
-              <Input
-                id="password"
-                prefix={
-                  <LockOutlined type="lock" style={{ color: "rgba(0,0,0,.25)" }} />
-                }
-                size="large"
-                type="password"
-                placeholder="Пароль"
-                value={values.password}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-            </Form.Item>
-            <Form.Item>
-              <Input
-                id="password_2"
-                prefix={
-                  <LockOutlined type="lock" style={{ color: "rgba(0,0,0,.25)" }} />
-                }
-                size="large"
-                type="password"
-                placeholder="Повторите пароль"
-              />
-            </Form.Item>
+            <FormField
+              name="email"
+              icon="mail"
+              placeholder="E-Mail"
+              handleChange={handleChange}
+              handleBlur={handleBlur}
+              touched={touched}
+              errors={errors}
+              values={values}
+            />
+
+            <FormField
+              name="fullname"
+              icon="user"
+              placeholder="Ваше имя и фамилия"
+              handleChange={handleChange}
+              handleBlur={handleBlur}
+              touched={touched}
+              errors={errors}
+              values={values}
+            />
+
+            <FormField
+              name="password"
+              icon="lock"
+              placeholder="Пароль"
+              type="password"
+              handleChange={handleChange}
+              handleBlur={handleBlur}
+              touched={touched}
+              errors={errors}
+              values={values}
+            />
+
+            <FormField
+              name="password_2"
+              icon="lock"
+              placeholder="Повторите пароль"
+              type="password"
+              handleChange={handleChange}
+              handleBlur={handleBlur}
+              touched={touched}
+              errors={errors}
+              values={values}
+            />
+
             <Form.Item>
               {isSubmitting && !isValid && <span>Ошибка!</span>}
               <Button
@@ -109,7 +83,7 @@ const RegisterForm = props => {
                 Зарегистрироваться
               </Button>
             </Form.Item>
-            <Link className="auth__register-link" to="/">
+            <Link className="auth__register-link" to="/signin">
               Войти в аккаунт
             </Link>
           </Form>
