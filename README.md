@@ -1,11 +1,17 @@
-Клиентская часть чата разрабатываемого по курсу - [Разработка чата на ReactJS + NodeJS](https://www.youtube.com/watch?v=iAV8TPaNt_A&list=PL0FGkDGJQjJFDr8R3D6dFVa1nhce_2-ly)
-
-**Stack:**
-
-- ReactJS
+# **Online Chat from React **
+***
+### JS-библиотеки:
 - Redux
-- React Router
+- Socket.io
 - Axios
-- Ant Design
-- date-fns
+- Lodash
+- Redux-thunk
 - Formik
+- React Router
+- Classnames
+***
+### Сервер:
+- NodeJS (ExpressJS)
+- MongoDB / Mongoose
+- Multer
+- PassportUS
