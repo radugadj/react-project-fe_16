@@ -84,6 +84,13 @@
   "eslintConfig": {
     "extends": "react-app"
   },
+  "proxy": "http://localhost:3000",
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
   "jest": {
     "collectCoverageFrom": [
       "src/**/*.{js,jsx,ts,tsx}",
@@ -137,10 +144,7 @@
       "@babel/plugin-transform-async-to-generator"
     ]
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+  "devDependencies": {
+    "@types/socket.io-client": "^3.0.0"
+  }
 }
