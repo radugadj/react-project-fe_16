@@ -1,4 +1,3 @@
-
 import React from "react";
 import PropTypes from "prop-types";
 import { Button as BaseButton } from "antd";
@@ -19,4 +18,4 @@ Button.propTypes = {
   className: PropTypes.string
 };
 
-export default Button
+export default Button;
