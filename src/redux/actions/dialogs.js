@@ -1,5 +1,5 @@
-import { dialogsApi } from 'utils/api';
-import socket from 'core/socket';
+import { dialogsApi } from "../../utils/api";
+import socket from "../../core/socket";
 
 const Actions = {
   setDialogs: items => ({

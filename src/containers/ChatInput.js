@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { filesApi } from 'utils/api';
 import socket from 'core/socket';
 
-import { ChatInput as ChatInputBase } from 'components';
+import { ChatInput as ChatInputBase } from "../components";
 
 import { messagesActions, attachmentsActions } from 'redux/actions';
 
