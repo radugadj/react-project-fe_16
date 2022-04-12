@@ -12,25 +12,25 @@ process.on('unhandledRejection', err => {
 });
 
 // Ensure environment variables are read.
-import '../config/env';
+require('../config/env');
 
-import { relative } from 'path';
-import { yellow, underline, cyan, green, red } from 'react-dev-utils/chalk';
-import { existsSync, emptyDirSync, copySync } from 'fs-extra';
-import { write } from 'bfj';
-import webpack from 'webpack';
-import configFactory from '../config/webpack.config';
-import { yarnLockFile, appHtml, appIndexJs, appPath, appBuild, appPackageJson, publicUrlOrPath, appPublic } from '../config/paths';
-import checkRequiredFiles from 'react-dev-utils/checkRequiredFiles';
-import formatWebpackMessages from 'react-dev-utils/formatWebpackMessages';
-import printHostingInstructions from 'react-dev-utils/printHostingInstructions';
-import { measureFileSizesBeforeBuild as _measureFileSizesBeforeBuild, printFileSizesAfterBuild as _printFileSizesAfterBuild } from 'react-dev-utils/FileSizeReporter';
-import printBuildError from 'react-dev-utils/printBuildError';
+
+const path = require('path');
+const chalk = require('react-dev-utils/chalk');
+const fs = require('fs-extra');
+const webpack = require('webpack');
+const configFactory = require('../config/webpack.config');
+const paths = require('../config/paths');
+const checkRequiredFiles = require('react-dev-utils/checkRequiredFiles');
+const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages');
+const printHostingInstructions = require('react-dev-utils/printHostingInstructions');
+const FileSizeReporter = require('react-dev-utils/FileSizeReporter');
+const printBuildError = require('react-dev-utils/printBuildError');
 
 const measureFileSizesBeforeBuild =
-  _measureFileSizesBeforeBuild;
-const printFileSizesAfterBuild = _printFileSizesAfterBuild;
-const useYarn = existsSync(yarnLockFile);
+  FileSizeReporter.measureFileSizesBeforeBuild;
+const printFileSizesAfterBuild = FileSizeReporter.printFileSizesAfterBuild;
+const useYarn = fs.existsSync(paths.yarnLockFile);
 
 // These sizes are pretty large. We'll warn for bundles exceeding them.
 const WARN_AFTER_BUNDLE_GZIP_SIZE = 512 * 1024;
@@ -39,29 +39,26 @@ const WARN_AFTER_CHUNK_GZIP_SIZE = 1024 * 1024;
 const isInteractive = process.stdout.isTTY;
 
 // Warn and crash if required files are missing
-if (!checkRequiredFiles([appHtml, appIndexJs])) {
+if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
   process.exit(1);
 }
-
-const argv = process.argv.slice(2);
-const writeStatsJson = argv.indexOf('--stats') !== -1;
 
 // Generate configuration
 const config = configFactory('production');
 
 // We require that you explicitly set browsers and do not fall back to
 // browserslist defaults.
-import { checkBrowsers } from 'react-dev-utils/browsersHelper';
-checkBrowsers(appPath, isInteractive)
+const { checkBrowsers } = require('react-dev-utils/browsersHelper');
+checkBrowsers(paths.appPath, isInteractive)
   .then(() => {
     // First, read the current file sizes in build directory.
     // This lets us display how much they changed later.
-    return measureFileSizesBeforeBuild(appBuild);
+    return measureFileSizesBeforeBuild(paths.appBuild);
   })
   .then(previousFileSizes => {
     // Remove all content but keep the directory so that
     // if you're in it, you don't end up in Trash
-    emptyDirSync(appBuild);
+    fs.emptyDirSync(paths.appBuild);
     // Merge with the public folder
     copyPublicFolder();
     // Start the webpack build
@@ -70,36 +67,36 @@ checkBrowsers(appPath, isInteractive)
   .then(
     ({ stats, previousFileSizes, warnings }) => {
       if (warnings.length) {
-        console.log(yellow('Compiled with warnings.\n'));
+        console.log(chalk.yellow('Compiled with warnings.\n'));
         console.log(warnings.join('\n\n'));
         console.log(
           '\nSearch for the ' +
-            underline(yellow('keywords')) +
+            chalk.underline(chalk.yellow('keywords')) +
             ' to learn more about each warning.'
         );
         console.log(
           'To ignore, add ' +
-            cyan('// eslint-disable-next-line') +
+            chalk.cyan('// eslint-disable-next-line') +
             ' to the line before.\n'
         );
       } else {
-        console.log(green('Compiled successfully.\n'));
+        console.log(chalk.green('Compiled successfully.\n'));
       }
 
       console.log('File sizes after gzip:\n');
       printFileSizesAfterBuild(
         stats,
         previousFileSizes,
-        appBuild,
+        paths.appBuild,
         WARN_AFTER_BUNDLE_GZIP_SIZE,
         WARN_AFTER_CHUNK_GZIP_SIZE
       );
       console.log();
 
-      const appPackage = require(appPackageJson);
-      const publicUrl = publicUrlOrPath;
+      const appPackage = require(paths.appPackageJson);
+      const publicUrl = paths.publicUrlOrPath;
       const publicPath = config.output.publicPath;
-      const buildFolder = relative(process.cwd(), appBuild);
+      const buildFolder = path.relative(process.cwd(), paths.appBuild);
       printHostingInstructions(
         appPackage,
         publicUrl,
@@ -112,13 +109,13 @@ checkBrowsers(appPath, isInteractive)
       const tscCompileOnError = process.env.TSC_COMPILE_ON_ERROR === 'true';
       if (tscCompileOnError) {
         console.log(
-          yellow(
+          chalk.yellow(
             'Compiled with the following type errors (you may want to check these before deploying your app):\n'
           )
         );
         printBuildError(err);
       } else {
-        console.log(red('Failed to compile.\n'));
+        console.log(chalk.red('Failed to compile.\n'));
         printBuildError(err);
         process.exit(1);
       }
@@ -133,6 +130,18 @@ checkBrowsers(appPath, isInteractive)
 
 // Create the production build and print the deployment instructions.
 function build(previousFileSizes) {
+  // We used to support resolving modules according to `NODE_PATH`.
+  // This now has been deprecated in favor of jsconfig/tsconfig.json
+  // This lets you use absolute paths in imports inside large monorepos:
+  if (process.env.NODE_PATH) {
+    console.log(
+      chalk.yellow(
+        'Setting NODE_PATH to resolve modules absolutely has been deprecated in favor of setting baseUrl in jsconfig.json (or tsconfig.json if you are using TypeScript) and will be removed in a future major release of create-react-app.'
+      )
+    );
+    console.log();
+  }
+
   console.log('Creating an optimized production build...');
 
   const compiler = webpack(config);
@@ -176,41 +185,27 @@ function build(previousFileSizes) {
           process.env.CI.toLowerCase() !== 'false') &&
         messages.warnings.length
       ) {
-        // Ignore sourcemap warnings in CI builds. See #8227 for more info.
-        const filteredWarnings = messages.warnings.filter(
-          w => !/Failed to parse source map/.test(w)
+        console.log(
+          chalk.yellow(
+            '\nTreating warnings as errors because process.env.CI = true.\n' +
+              'Most CI servers set it automatically.\n'
+          )
         );
-        if (filteredWarnings.length) {
-          console.log(
-            yellow(
-              '\nTreating warnings as errors because process.env.CI = true.\n' +
-                'Most CI servers set it automatically.\n'
-            )
-          );
-          return reject(new Error(filteredWarnings.join('\n\n')));
-        }
+        return reject(new Error(messages.warnings.join('\n\n')));
       }
 
-      const resolveArgs = {
+      return resolve({
         stats,
         previousFileSizes,
         warnings: messages.warnings,
-      };
-
-      if (writeStatsJson) {
-        return write(appBuild + '/bundle-stats.json', stats.toJson())
-          .then(() => resolve(resolveArgs))
-          .catch(error => reject(new Error(error)));
-      }
-
-      return resolve(resolveArgs);
+      });
     });
   });
 }
 
 function copyPublicFolder() {
-  copySync(appPublic, appBuild, {
+  fs.copySync(paths.appPublic, paths.appBuild, {
     dereference: true,
-    filter: file => file !== appHtml,
+    filter: file => file !== paths.appHtml,
   });
 }

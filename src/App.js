@@ -1,16 +1,19 @@
-import React, { Component } from "react";
-import { Route } from "react-router-dom";
+import React from 'react';
 
-import { Auth, Home } from "./pages";
-class App extends Component {
-  render() {
-    return (
-      <div className="wrapper">
-        <Route exact path={["/", "/login", "/reg"]} component={Auth} />
-        <Route exact path="/im" component={Home} />
+import { Header } from './components';
+import { Home, Cart } from './pages';
+import { Route } from 'react-router-dom';
+
+function App() {
+  return (
+    <div className="wrapper">
+      <Header />
+      <div className="content">
+        <Route path="/" component={Home} exact />
+        <Route path="/cart" component={Cart} exact />
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 export default App;
