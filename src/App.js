@@ -1,26 +1,19 @@
-import React from "react";
-import { connect } from "react-redux";
-import { Route, Redirect, Switch } from "react-router-dom";
+import React from 'react';
 
-import { Auth, Home } from "pages";
+import { Header } from './components';
+import { Home, Cart } from './pages';
+import { Route } from 'react-router-dom';
 
-const App = props => {
-  const { isAuth } = props;
+function App() {
   return (
     <div className="wrapper">
-      <Switch>
-        <Route
-          exact
-          path={["/signin", "/signup", "/signup/verify"]}
-          component={Auth}
-        />
-        <Route
-          path="/"
-          render={() => (isAuth ? <Home /> : <Redirect to="/signin" />)}
-        />
-      </Switch>
+      <Header />
+      <div className="content">
+        <Route path="/" component={Home} exact />
+        <Route path="/cart" component={Cart} exact />
+      </div>
     </div>
   );
-};
+}
 
-export default connect(({ user }) => ({ isAuth: user.isAuth }))(App);
+export default App;
