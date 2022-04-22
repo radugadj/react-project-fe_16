@@ -1,9 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Button from '../Button';
+import ModalWindow from '../modal';
+
 
 function PizzaBlock({ id, name, imageUrl, price, types, sizes, onClickAddPizza, addedCount }) {
+  const [ modalActive, setModalActive ] = useState(true);
   const availableTypes = ['тонкое', 'традиционное'];
   const availableSizes = [26, 30, 40];
 
@@ -31,7 +34,8 @@ function PizzaBlock({ id, name, imageUrl, price, types, sizes, onClickAddPizza, 
   };
 
   return (
-    <div className="pizza-block">
+    <div className="pizza-block" onClick={() => setModalActive(true)}>
+      <ModalWindow active={modalActive} setActive={setModalActive} />
       <img className="pizza-block__image" src={imageUrl} alt="Pizza" />
       <h4 className="pizza-block__title">{name}</h4>
       <div className="pizza-block__selector">
@@ -80,7 +84,9 @@ function PizzaBlock({ id, name, imageUrl, price, types, sizes, onClickAddPizza, 
           {addedCount && <i>{addedCount}</i>}
         </Button>
       </div>
+      
     </div>
+    
   );
 }
 
