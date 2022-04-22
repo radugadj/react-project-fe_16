@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import logoSvg from '../assets/img/pizza-logo.svg';
+import login from '../assets/img/login.png';
 import Button from './Button';
 
 function Header() {
@@ -20,9 +21,24 @@ function Header() {
             </div>
           </div>
         </Link>
-
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div className="header__login">
+          <Link to="/login">
+            <button className="button_profil">
+              <img
+              height="24"
+              width="24"
+              src={login} alt="Login" />
+            </button>
+          </Link>
+        </div>
         <div className="header__cart">
           <Link to="/cart">
+
             <Button className="button--cart">
               <span>{totalPrice} ₽</span>
               <div className="button__delimiter"></div>
