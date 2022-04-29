@@ -1,8 +1,7 @@
 export { default as Button } from './Button';
-export { default as Block } from './Block';
-export { default as Message } from './Message';
-export { default as Time } from "./Time";
-export { default as DialogItem } from './DialogItem';
-export { default as IconReaded } from './IconReaded';
-export { default as Dialogs } from './Dialogs';
-export { default as Avatar } from './Avatar';
+export { default as Header } from './Header';
+export { default as Categories } from './Categories';
+export { default as SortPopup } from './SortPopup';
+export { default as CartItem } from './CartItem';
+export { default as PizzaBlock } from './PizzaBlock';
+export { default as PizzaLoadingBlock } from './PizzaBlock/LoadingBlock';

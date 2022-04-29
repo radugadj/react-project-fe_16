@@ -1,17 +1,12 @@
-# **Online Chat from React **
+# **React Pizza-shop **
 ***
+
 ### JS-библиотеки:
-- Redux
-- Socket.io
-- Axios
-- Lodash
-- Redux-thunk
-- Formik
+- ReactJS + хуки
 - React Router
-- Classnames
+- Redux
+- Redux thunk
+- json-server
+- Axios
+- classnames
 ***
-### Сервер:
-- NodeJS (ExpressJS)
-- MongoDB / Mongoose
-- Multer
-- PassportUS
