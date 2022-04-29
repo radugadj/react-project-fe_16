@@ -30,6 +30,7 @@ const LoginForm = () => {
     } else {
       setEmailError("");
     }
+    localStorage.setItem('email', setEmail);
   };
 
   const passwordHandler = (e) => {
@@ -42,6 +43,7 @@ const LoginForm = () => {
     } else {
       setPasswordError("");
     }
+    localStorage.setItem('password', setPassword);
   };
 
   const blurHandler = (e) => {

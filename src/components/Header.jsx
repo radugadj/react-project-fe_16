@@ -5,16 +5,17 @@ import { useSelector } from 'react-redux';
 import logoSvg from '../assets/img/pizza-logo.svg';
 import login from '../assets/img/login.png';
 import Button from './Button';
+import Home from '../HOC/Home'
+
 
 function Header() {
   const { totalPrice, totalCount } = useSelector(({ cart }) => cart);
-
   return (
     <div className="header">
       <div className="container">
         <Link to="/">
           <div className="header__logo">
-            <img width="50" src={logoSvg} alt="Pizza Hut" />
+            <img width="100" height="100"  src={logoSvg} alt="Pizza Hut" />
             <div>
               <h1>Pizza</h1>
               <p>самая вкусная пицца во вселенной</p>
@@ -23,6 +24,7 @@ function Header() {
         </Link>
         <div></div>
         <div></div>
+        <Home />
         <div></div>
         <div></div>
         <div></div>

@@ -1,4 +1,4 @@
-@import 'variables';
+@import '../variables';
 
 .button {
   display: inline-block;
@@ -25,11 +25,11 @@
   }
 
   &:hover {
-    background-color: darken($orange, 8%);
+    background-color: darken($orange, 10%);
   }
 
   &:active {
-    background-color: darken($orange, 12%);
+    background-color: darken($orange, 20%);
     transform: translateY(1px);
   }
 

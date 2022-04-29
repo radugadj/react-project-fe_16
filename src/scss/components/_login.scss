@@ -22,10 +22,13 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 10px;
-  margin: 10px;
+  padding: 20px;
+  margin: 20px;
 }
 @import '~antd/dist/antd.css';
+// .ant-input-affix-wrapper {
+//   margin: 5px;
+// }
 
 .login-form {
   max-width: 300px;
@@ -52,12 +55,10 @@
     transition: background-color $duration ease-in-out, border-color $duration ease-in-out;
     border: 1px solid transparent;
     @include noselect();
-  
     &,
     span {
       color: #fff;
     }
-  
     i,
     span,
     path,
