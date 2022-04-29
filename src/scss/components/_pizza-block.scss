@@ -1,11 +1,10 @@
 @import 'variables';
 
 .pizza-block {
-  width: 70%;
+  width: 100%;
   text-align: center;
-  margin-bottom: 65px;
-  box-shadow: 2px 2px 5px rgba(154, 147, 140, 0.5);
-  border-radius: 20px;
+  margin-bottom: 75px;
+  border-radius: 10px;
 
   @media (max-width: 1090px) {
     margin-bottom: 35px;

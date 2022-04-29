@@ -1,10 +1,9 @@
-import React from 'react';
+import React, {useState } from 'react';
 import {
   Form,
   Input,
-  Select,
 } from 'antd';
-const { Option } = Select;
+
 
 
 const formItemLayout = {
@@ -40,23 +39,14 @@ const tailFormItemLayout = {
 
 const RegistrationForm = () => {
   const [form] = Form.useForm();
+  const [formValid] = useState(false);
+
+  
 
   const onFinish = (values) => {
     console.log('Received values of form: ', values);
   };
 
-  const prefixSelector = (
-    <Form.Item name="prefix" noStyle>
-      <Select
-        style={{
-          width: 70,
-        }}
-      >
-        <Option value="375">+375</Option>
-        <Option value="7">+7</Option>
-      </Select>
-    </Form.Item>
-  );
 
   return (
     <Form
@@ -142,6 +132,7 @@ const RegistrationForm = () => {
       <Form.Item
         name="phone"
         label="Телефон"
+        
         rules={[
           {
             required: true,
@@ -149,31 +140,14 @@ const RegistrationForm = () => {
           },
         ]}
       >
-        <Input
-          addonBefore={prefixSelector}
-          style={{
-            width: '100%',
-          }}
-        />
-      </Form.Item>
-      <Form.Item
-        name="gender"
-        label="Пол"
-        rules={[
-          {
-            required: true,
-            message: 'Пожалуйста выберите ваш пол',
-          },
-        ]}
-      >
-        <Select placeholder="Выберите ваш пол">
-          <Option value="male">Male</Option>
-          <Option value="female">Female</Option>
-          <Option value="other">Other</Option>
-        </Select>
+        <Input 
+        pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
+        type="tel"
+        required
+        placeholder="+375 29 100-10-10"/>
       </Form.Item>
       <Form.Item {...tailFormItemLayout}>
-        <button className="button_login" type="primary" htmlType="submit">
+        <button className="button_login" disabled={!formValid} type="submit">
           Регистрация
         </button>
       </Form.Item>
