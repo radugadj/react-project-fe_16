@@ -31,7 +31,9 @@ function PizzaBlock({ id, name, imageUrl, price, types, sizes, onClickAddPizza, 
       type: availableTypes[activeType],
     };
     onClickAddPizza(obj);
+    
   };
+  
 
   return (
     <div className="pizza-block" onClick={() => setModalActive(true)}>
