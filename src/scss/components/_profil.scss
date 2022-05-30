@@ -1,0 +1,16 @@
+.profil {
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    margin: 50px;
+    padding: 50px;
+}
+
+.input {
+    display: center;
+}

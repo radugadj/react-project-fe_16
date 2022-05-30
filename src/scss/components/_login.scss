@@ -5,7 +5,7 @@
     font-weight: 600;
     font-size: 28px;
     line-height: 36px;
-    margin: inherit;
+    margin: 0;
   }
   display: flex;
   flex-direction: column;
@@ -14,7 +14,13 @@
   justify-content: center;
   align-items: center;
 }
+.logit-title {
+  display: center;
+  margin: 0;
+}
 .login__block {
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  border-radius: 10px;
   display: flex !important;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -32,6 +38,8 @@
 
 .login-form {
   max-width: 300px;
+  display: center;
+  margin-top: 5px;
 }
 .login-form-forgot {
   float: right;
@@ -45,11 +53,10 @@
 
 .button_login {
   margin: 10px;
-    display: inline-block;
+    display: center;
     background-color: $orange;
     border-radius: 10px;
     padding: 10px 20px;
-    min-width: 100px;
     text-align: center;
     cursor: pointer;
     transition: background-color $duration ease-in-out, border-color $duration ease-in-out;

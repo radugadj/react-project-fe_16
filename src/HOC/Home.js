@@ -11,7 +11,7 @@ const Home = () => {
 
   useEffect(() => {
     window.localStorage.setItem("theme", theme);
-  }, [theme, themeSwitchHandler]);
+  });
 
   return (
     <Layout>

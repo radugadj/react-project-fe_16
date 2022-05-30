@@ -6,7 +6,8 @@ import { useSelector } from 'react-redux';
 import logoSvg from '../assets/img/pizza-logo.svg';
 import Button from './Button';
 import Home from '../HOC/Home'
-import HomePage from '../pages/HomePage'
+import login from '../assets/img/login.png';
+
 
 function Header() {
   const { totalPrice, totalCount } = useSelector(({ cart }) => cart);
@@ -14,6 +15,7 @@ function Header() {
   return (
     <div className="header">
       <div className="container">
+        
         <Link to="/">
           <div className="header__logo">
             <img width="100" height="100"  src={logoSvg} alt="Pizza Hut" />
@@ -29,10 +31,6 @@ function Header() {
         <div></div>
         <div></div>
         <div></div>
-        <div>
-          
-         <HomePage />
-        </div>
         <div className="header__cart">
           <Link to="/cart">
             <Button className="button--cart">
@@ -69,6 +67,9 @@ function Header() {
               <span>{totalCount}</span>
             </Button>
           </Link>
+        </div>
+        <div>
+          <Link to="/dasboard"><Button><img width="30" height="30"  src={login} alt="Dasboard" /></Button></Link>
         </div>
       </div>
     </div>
