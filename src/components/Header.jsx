@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
@@ -11,11 +11,12 @@ import login from '../assets/img/login.png';
 
 function Header() {
   const { totalPrice, totalCount } = useSelector(({ cart }) => cart);
-
+  useEffect(() => {
+    localStorage.setItem('totalPrice', totalPrice)
+    localStorage.setItem('totalCount', totalCount)})
   return (
     <div className="header">
       <div className="container">
-        
         <Link to="/">
           <div className="header__logo">
             <img width="100" height="100"  src={logoSvg} alt="Pizza Hut" />

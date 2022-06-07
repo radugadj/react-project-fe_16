@@ -17,12 +17,19 @@ const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     font-size: 16px;
   }
-
+  .pizza-block__price {
+    color: white
+    text: ${(props) => props.theme.text}
+    
+  }
   body, .wrapper {
     font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;;
     background: ${(props) => props.theme.background};
   }
-
+  .payment_title {
+    text: ${(props) => props.theme.text}
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
 `;
 
 // 2.
@@ -56,6 +63,7 @@ const Layout = ({ children }) => {
     default:
       theme = lightTheme;
   }
+  
   
   return (
     <ThemeProvider theme={theme}>

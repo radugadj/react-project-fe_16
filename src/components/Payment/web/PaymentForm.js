@@ -7,14 +7,14 @@ const CARD_OPTIONS = {
 	iconStyle: "solid",
 	style: {
 		base: {
-			iconColor: "#c4f0ff",
-			color: "black",
+			iconColor: "#010101",
+			color: "#010101",
 			fontWeight: 500,
 			fontFamily: "Roboto, Open Sans, Segoe UI, sans-serif",
 			fontSize: "16px",
 			fontSmoothing: "antialiased",
-			":-webkit-autofill": { color: "#fce883" },
-			"::placeholder": { color: "#87bbfd" }
+			":-webkit-autofill": { color: "#010101" },
+			"::placeholder": { color: "#010101" }
 		},
 		invalid: {
 			iconColor: "#ffc7ee",
@@ -67,12 +67,12 @@ export default function PaymentForm() {
                     <CardElement options={CARD_OPTIONS}/>
                 </div>
             </fieldset>
-            <button className="button1">Pay</button>
+            <button>Оплата</button>
         </form>
         :
-       <div>
-           <h2>You just bought a sweet spatula congrats this is the best decision of you're life</h2>
-       </div> 
+       <div className="content_payment">
+           <h4 className="payment_title">Оплата прошла! Ожидайте с Вами свяжется наш оператор!</h4>
+       </div>
         }
         </>
     )

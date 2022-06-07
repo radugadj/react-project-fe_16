@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import cartEmptyImage from '../assets/img/empty-cart.png';
 import { CartItem, Button } from '../components';
 import { clearCart, removeCartItem, plusCartItem, minusCartItem } from '../redux/actions/cart';
-import StripeContainer  from "../components/Payment/StripeContainer"
+import CheckoutForm   from "../components/Payment/web/PaymentForm"
 function Cart() {
   const dispatch = useDispatch();
   const { totalPrice, totalCount, items } = useSelector(({ cart }) => cart);
@@ -33,7 +33,7 @@ function Cart() {
   const onMinusItem = (id) => {
     dispatch(minusCartItem(id));
   };
-
+  
 
   return (
     <div className="container container--cart">
@@ -157,7 +157,7 @@ function Cart() {
                 </Link>
               </a>
               <Link to="/payment">
-              <Button onClick={<StripeContainer />} className="pay-btn">
+              <Button onClick={<CheckoutForm  />} className="pay-btn">
                 <span>Оплатить сейчас</span>
               </Button>
               </Link>

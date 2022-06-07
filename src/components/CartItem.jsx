@@ -1,7 +1,18 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Button from './Button';
 
 const CartItem = ({ id, name, type, size, totalPrice, totalCount, onRemove, onMinus, onPlus }) => {
+  useEffect(() => {
+    window.localStorage.setItem("size", size)
+    window.localStorage.setItem("id", id)
+    window.localStorage.setItem("name", name)
+    window.localStorage.setItem("totalPrice", totalPrice)
+    window.localStorage.setItem("totalCount", totalCount)
+    window.localStorage.setItem("onRemove", onRemove)
+    window.localStorage.setItem("onMinus", onMinus)
+    window.localStorage.setItem("onPlus", onPlus)
+    window.localStorage.setItem("type", type)
+  });
   const handleRemoveClick = () => {
     onRemove(id);
   };
