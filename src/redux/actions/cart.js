@@ -1,6 +1,9 @@
+
 export const addPizzaToCart = (pizzaObj) => ({
+
   type: 'ADD_PIZZA_CART',
   payload: pizzaObj,
+  
 });
 
 export const clearCart = () => ({
@@ -21,3 +24,4 @@ export const minusCartItem = (id) => ({
   type: 'MINUS_CART_ITEM',
   payload: id,
 });
+

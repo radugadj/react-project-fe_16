@@ -6,6 +6,7 @@
 .LSOverride
 *vscode
 .vscode
+*.yarn
 
 # Icon must end with two \r
 Icongit checkout developer

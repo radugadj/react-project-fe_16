@@ -4,7 +4,7 @@ import { GlobalContext } from "./globalContext";
 import Layout from "./Layout";
 import { Container, Flex } from "./globalStyles";
 import {
-  SwitchButton,
+  Button,
 } from "./homestyles";
 const Home = () => {
   const { theme, themeSwitchHandler } = useContext(GlobalContext);
@@ -18,15 +18,13 @@ const Home = () => {
         <Container fluid>
           <Flex center>
 						{/* 2. */}
-            <SwitchButton>
-              <input
-                type='checkbox'
-                onChange={() =>
+            <Button className="btn"
+                onClick={() =>
                   themeSwitchHandler(theme === "dark" ? "light" : "dark")
                 }
-              />
-              <span></span>
-            </SwitchButton>
+                >
+                SwitchTheme
+            </Button>
           </Flex>
         </Container>
     </Layout>

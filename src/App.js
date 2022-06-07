@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 
 import { Header } from "./components";
-import  StripeContainer  from "./components/Payment/StripeContainer";
+import  StripeContainer  from "./components/Payment/web/StripeContainer";
 import {
   Dashboard,
   Login,
@@ -23,8 +23,9 @@ import store from "./redux/store";
 function App() {
   return (
     <Provider store={store}>
+      <GlobalContextProvider>
       <Router>
-        <GlobalContextProvider>
+        
           <div className="wrapper">
             <Header />
             <div className="content">
@@ -45,8 +46,9 @@ function App() {
               </AuthProvider>
             </div>
           </div>
-        </GlobalContextProvider>
+       
       </Router>
+      </GlobalContextProvider>
     </Provider>
   );
 }

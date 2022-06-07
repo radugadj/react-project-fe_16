@@ -46,9 +46,9 @@ export default function UpdateProfile() {
       <div className="profil">
           <h2>Обновить Профиль</h2>
           {error && <Alert variant="danger">{error}</Alert>}
-          <Form onSubmit={handleSubmit}>
+          <Form className="profil" onSubmit={handleSubmit}>
             <Form.Group id="password">
-              <Form.Label>Пароль</Form.Label>
+              
               <Form.Control
                 type="password"
                 ref={passwordRef}
@@ -57,14 +57,14 @@ export default function UpdateProfile() {
               />
             </Form.Group>
             <Form.Group id="password-confirm">
-              <Form.Label>Подтвердите пароль</Form.Label>
+             
               <Form.Control
                 type="password"
                 ref={passwordConfirmRef}
                 placeholder="Подтвердите пароль"
               />
             </Form.Group>
-            <Button disabled={loading} className="w-100" type="submit">
+            <Button disabled={loading} className="button" type="submit">
               Обновить
             </Button>
           </Form>
