@@ -3,6 +3,7 @@ import React, { useState} from "react";
 export const GlobalContext = React.createContext({
   currentTheme: "",
   themeSwitchHandler: () => {},
+  
 });
 
 const GlobalContextProvider = (props) => {
